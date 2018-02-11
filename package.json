@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/a-guo/WiCHacks2018#readme",
   "dependencies": {
+    "body-parser": "~1.13.2",
+    "dijkstrajs": "^1.0.1",
     "express": "^4.16.2",
-    "body-parser": "~1.13.2"
+    "node-all-paths": "^1.0.3"
   }
 }
