@@ -31,13 +31,15 @@
                       </ul>
                     </div>
                   </nav>
+             
+
               <div align="center">
-                    <marquee scrollamount="2">"Safety Doesn't Happen By Accident.."</marquee>
+                    <marquee scrollamount="2"><font color = red>"Safety Doesn't Happen By Accident.."</font></marquee>
                     </div>
-                    <h2></h2>
-<p>This website depicts the <strong>safest routes</strong> of the area which you have selected. You can take these paths at any point of time.</p>
-<h3>Safest Path In This Area</h3>
-<div id="map">
+                
+                    <h2><p style="margin-left: 40px"><font face="Times New Roman" color= black>Safest Path In This Area</font></p></h2>
+              <p style="margin-left: 40px"><font color = black> This website depicts the <strong>safest routes</strong> of the area which you have selected. You can take these paths at any point of time.</font></p>
+          <div id="map">
 <script>
   var map, infoWindow;
   function initMap() {
@@ -64,7 +66,7 @@
               lng: position.coords.longitude
             };
             var map = new google.maps.Map(document.getElementById('map'), {   //creating the map (based on the pos declared right above it)
-            zoom: 6,
+            zoom: 8,
             center: pos
             });
             doThisAfterFindLocation(pos);
@@ -77,13 +79,14 @@
             infoWindow.setContent('Location found.');
             infoWindow.open(map);
             map.setCenter(pos);
+            console.log(infoWindow)
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
-        } else {
+        } else{
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
-        
+          
         }
       }
 
