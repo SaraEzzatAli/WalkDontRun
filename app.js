@@ -85,6 +85,8 @@ var grid = []; // array of lists
 var maxCrime = -1;
 var minSum = 9007199254740991;
 var minSum_index;
+var possiblePaths;
+/*
 var possiblePaths = [{A:1, B:2, C:8, D:5},
 					 {E:4, B:27, C:3, D:50},
 					 {A:3, b:12, C:4, D:5},
@@ -103,6 +105,7 @@ var possiblePaths = [{A:1, B:2, C:8, D:5},
 					 {A:10, q:1, C:3, D:5},
 					 {q:1, e:2, r:1, w:1} ]; // list of objects that track different paths
 						// i.e. [{A:1, B:2, C:3, ...}, {...},...]
+						*/
 var shortestPaths = []; // list (maybe) of objects that have shortest path
 var pathList = [];
 var sumList = [];
@@ -127,6 +130,7 @@ function ascii (i, rows, j) {
 
 
 // initializes the grid with crime data
+/*
 function initGrid() {
 	for (i = 0; i < rows; i++) {
 		var list = [];
@@ -145,11 +149,43 @@ function initGrid() {
 			} else {
 				block.destination = false;
 			}
+			console.log(block);
 			list.push(block);
 		}
 		block.x += 2 * radius;
 		grid.push(list);
 		console.log(grid);
+	}
+}
+*/
+// initializes the grid with crime data
+function initGrid() {
+	for (i = 0; i < rows; i++) {
+		for (j = 0; j < columns; j++) {
+			block.x = currX + 2 * radius * i;
+			block.y = currY + 2 * radius * j;
+			block.name = String.fromCharCode(ascii(i, rows, j));
+			spotcrime.getCrimes(loc, radius, function(err, crimes) {
+				block.value =  crimes.length;
+			});
+			maxCrime = (maxCrime >= block.value ? maxCrime : block.value);
+			// checks if block is destination block
+			if (block.x == newX && block.y == newY) {
+				block.destination = true;
+				destinationBlockName = block.name;
+			} else {
+				block.destination = false;
+			}
+			//console.log(block);
+			list.push(block);
+			loc.currY += 2 * radius * j;
+		}
+		//console.log(list);
+
+		grid.push(list);
+		//console.log(grid);
+		list = [];
+		loc.currX += 2 * radius * i;
 	}
 }
 
@@ -159,15 +195,15 @@ app.get('/', function(req, res){
 
 app.listen(3400, function(req, res) {
 	initGrid();
-
-
+	console.log(grid[0][0]);
+	//adding();
 });
 
-//app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 // ---------------------SAFEST PATH ALGO -------------------------
 
 // add all nodes
+/*
 function adding() {
 	for (i = 0; i < rows; i++) {
 		for (j = 0; j < columns; j++) {
@@ -215,9 +251,8 @@ function adding() {
 	}
 	// finding all possible routes
 	possiblePaths = route.path('!', destinationBlockName);
+	return possiblePaths;
 }
-
-
 
 function autosum(list) {
 	var sum = 0;
@@ -246,7 +281,6 @@ function sumWorkingPaths() {
 function findShortestPath() {
 	var length = sumList.length;
 	for (i = 0; i < length; i++) {
-		//console.log(minSum);
 		if (sumList[i] < minSum) {
 			minSum = sumList[i];
 			minSum_index = i;
@@ -260,4 +294,4 @@ function findShortestPath() {
 // Figure out how to add path to map --> Google API?
 // maxCrime/7 
 
-
+*/

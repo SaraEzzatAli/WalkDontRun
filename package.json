@@ -20,6 +20,8 @@
     "body-parser": "~1.13.2",
     "dijkstrajs": "^1.0.1",
     "express": "^4.16.2",
-    "node-all-paths": "^1.0.3"
+    "node-all-paths": "^1.0.3",
+    "node-dijkstra": "^2.5.0",
+    "spotcrime": "^1.0.1"
   }
 }
