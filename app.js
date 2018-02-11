@@ -6,7 +6,6 @@ var spotcrime = require('spotcrime');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
-// var spotcrime = require('spotcrime');
 
 app.post('/test', function(req, res) {
 
@@ -39,13 +38,13 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 // somewhere near phoenix, az
 var loc = {
-  currX: 43.0847863, // pls check
-  currY: -77.68137229999999
+  lat: 43.0847863, // pls check
+  lon: -77.68137229999999
 };
 
 // variables that need to be connected to JSON from Alex
-var currX = loc.currX;
-var currY = loc.currY;
+var currX = loc.lat;
+var currY = loc.lon;
 var newX = 33.39657;
 var newY = -112.03422;
 
@@ -53,8 +52,8 @@ var radius = 0.5; // this is miles <-- 1/2 distance between most geometric block
 
 var destinationBlockName;
 var block = {
-	x: 0,
-	y: 0,
+	x: currX,
+	y: currY,
 	name: '',
 	value: 0,
 	traversed: false,
@@ -103,41 +102,33 @@ function ascii (i, rows, j) {
 	return num;
 }
 
+//maxCrime = (maxCrime < block.value ? block.value : maxCrime);
+
+
 // initializes the grid with crime data
 function initGrid() {
 	for (i = 0; i < rows; i++) {
+		var list = [];
 		for (j = 0; j < columns; j++) {
-			block.x = currX + 2 * radius * i;
-			block.y = currY + 2 * radius * j;
-			//console.log(block.x);
-			//console.log(block.y);
+			loc.lat = block.x;
+			loc.lon = block.y;
+			block.y += 2 * radius;
 			block.name = String.fromCharCode(ascii(i, rows, j));
-			spotcrime.getCrimes(loc, radius, function(err, crimes) {
-				block.value =  crimes.length;
-				console.log(block.value);
+			block.value = spotcrime.getCrimes(loc, radius, function(err, crimes){
+				return crimes.length;
 			});
-			//console.log(maxCrime);
-			maxCrime = (maxCrime >= block.value ? maxCrime : block.value);
-			// checks if block is destination block
+			block.traversed = false;
 			if (block.x == newX && block.y == newY) {
 				block.destination = true;
+				destinationBlockName = block.name;
 			} else {
 				block.destination = false;
 			}
-			//console.log(block);
-			
-			if (i == (rows - 1) && j == (columns - 1)) {
-				destinationBlockName = block.name;
-			}
 			list.push(block);
-			loc.currY += 2 * radius * j;
 		}
-		//console.log(list);
-
+		block.x += 2 * radius;
 		grid.push(list);
-		//console.log(grid);
-		list = [];
-		loc.currX += 2 * radius * i;
+		console.log(grid);
 	}
 }
 
@@ -147,21 +138,23 @@ app.get('/', function(req, res){
 
 app.listen(3400, function(req, res) {
 	initGrid();
-	//console.log(grid);
-	//console.log(maxCrime);
+
+
 });
 
 //app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 // ---------------------SAFEST PATH ALGO -------------------------
 
+function findNeighbours()
+
 // create all potential paths from point A to B
 function findPaths() {
-	for(i = 0; i < rows; i++) {
-		for (j = 0; j < columns; j++) {
-			if (grid[i][j].destination) return;
-			
-		}
+	var minHeap = [];
+	var minHeapLength = rows * columns;
+	minHeap[0] = 0;
+	whiel (minHeapLength > 0) {
+
 	}
 }
 
