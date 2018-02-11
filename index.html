@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="bootstrap.min.css"/>
         <title>
             Safest Distance
@@ -44,6 +45,18 @@
   function initMap() {
     infoWindow = new google.maps.InfoWindow;
 
+      function doThisAfterFindLocation(position){
+        $.post( "/test", { 
+          lat: position.lat, 
+          lng: position.lng 
+        }, function(data){
+          console.log(data);
+          var foo = data[0][0];
+          console.log(foo);
+        });
+      };
+
+
     //HTML5 geolocation
 
     if (navigator.geolocation) {
@@ -56,10 +69,12 @@
             zoom: 8,
             center: pos
             });
+            doThisAfterFindLocation(pos);
             var marker = new google.maps.Marker({
             position: pos,
             map: map
              });
+
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
             infoWindow.open(map);
