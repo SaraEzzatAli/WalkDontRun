@@ -5,8 +5,17 @@ var bodyParser = require('body-parser');
 var spotcrime = require('spotcrime');
 
 // for node-all-paths library
+
 const Graph = require('node-all-paths');
 const graph = new Graph();
+
+
+// for dijkstra.js
+/*
+var expect = require('expect.js');
+var dijkstra = require('dijkstra.js');
+var find_path = dijkstra.find_path;
+*/
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -157,12 +166,7 @@ app.listen(3400, function(req, res) {
 //app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 // ---------------------SAFEST PATH ALGO -------------------------
-x: currX,
-	y: currY,
-	name: '',
-	value: 0,
-	traversed: false,
-	destination: false
+
 // add all nodes
 function adding() {
 	for (i = 0; i < rows; i++) {
@@ -181,13 +185,39 @@ function adding() {
 													   grid[rows - 2][1].name : grid[rows - 2][1].value,
 													   grid[rows - 1][1].name : grid[rows - 1][1].value});
 			// adding sides - top
-			} else if ()
+			} else if (i == 0) {
+				graph.addNode(grid[i][j].name, {grid[i][j - 1].name : grid[i][j - 1].value,
+							  					grid[i][j + 1]. name : grid[i][j + 1].value,
+							  					grid[i + 1][j + 1].name : grid[i + 1][j + 1].value});
+			} else if (j == 0) {
+				graph.addNode(grid[i][j].name, {grid[i - 1][j].name : grid[i - 1][j].value,
+							  					grid[i + 1][j]. name : grid[i + 1][j].value,
+							  					grid[i][j + 1].name : grid[i][j + 1].value});        
+			} else if (i == rows - 1) {
+				graph.addNode(grid[i][j].name, {grid[i][j - 1].name : grid[i][j - 1].value,
+							  					grid[i][j + 1]. name : grid[i][j + 1].value,
+							  					grid[i - 1][j + 1].name : grid[i - 1][j + 1].value});
+			} else if (j == columns - 1) {
+				graph.addNode(grid[i][j].name, {grid[i - 1][j].name : grid[i - 1][j].value,
+							  					grid[i + 1][j]. name : grid[i + 1][j].value,
+							  					grid[i][j - 1].name : grid[i][j - 1].value});        
+			} else {
+				graph.addNode(grid[i][j].name, {grid[i - 1][j].name : grid[i - 1][j].value,
+							  					grid[i + 1][j]. name : grid[i + 1][j].value,
+							  					grid[i][j + 1].name : grid[i][j + 1].value
+							  					grid[i][j - 1].name : grid[i][j - 1].value
+							  					grid[i - 1][j - 1].name : grid[i - 1][j - 1].value,
+							  					grid[i + 1][j + 1]. name : grid[i + 1][j + 1].value,
+							  					grid[i - 1][j + 1].name : grid[i - 1][j + 1].value
+							  					grid[i + 1][j - 1].name : grid[i + 1][j - 1].value});        
+			}
 		}
 	}
+	// finding all possible routes
+	possiblePaths = route.path('!', destinationBlockName);
 }
 
-// finding all possible routes
-possiblePaths = route.path('!', destinationBlockName);
+
 
 function autosum(list) {
 	var sum = 0;
