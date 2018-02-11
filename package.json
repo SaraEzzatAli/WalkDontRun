@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/a-guo/WiCHacks2018#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "body-parser": "~1.13.2"
   }
 }
