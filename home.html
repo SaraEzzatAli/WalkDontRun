@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="bootstrap.min.css"/>
+        <title>
+            Safest Distance
+        </title>
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <a class="navbar-brand" href="#">LOGO</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarColor01">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="#">Contact Us</a>
+                              </li>
+                      </ul>
+                    </div>
+                  </nav>
+              <div align="center">
+                    <marquee scrollamount="2">"SAFETY DOESN'T HAPPEN BY ACCIDENT!!"</marquee>
+                    </div>
+                    <h2>Description</h2>
+<p>This website depicts the <strong>safest routes</strong> of the area which you have selected. You can take these paths at any point of time.</p>
+<h3>Safest Path In This Area</h3>
+<div id="map"></div>
+<script>
+  function initMap() {
+    var uluru = {lat: -25.363, lng: 131.044};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: uluru
+    });
+    var marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+  }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+</script>
+<footer>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                
+              
+                <div class="collapse navbar-collapse" id="navbarColor01">
+
+                </div>
+              </nav>
+      </footer>
+</body> 
+    </body>
+</html>
