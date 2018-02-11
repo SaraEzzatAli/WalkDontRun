@@ -35,6 +35,14 @@ app.get('/bootstrap.min.css', function(req, res){
     res.sendFile(path.join(__dirname+'/bootstrap.min.css'));
 });
 
+app.get('/about.html', function(req, res){
+	res.sendFile(path.join(__dirname+'/about.html'));
+});
+
+app.get('/contact.html', function(req, res){
+	res.sendFile(path.join(__dirname+'/contact.html'));
+});
+
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 
